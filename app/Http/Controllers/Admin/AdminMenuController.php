@@ -80,6 +80,19 @@ class AdminMenuController extends Controller
 
 	public function update($id, Request $request){
 
+		if($request->get('_action') == 'edit_menu'){
+
+			$new_name = $request->get('menu-edit-name');
+
+			$menu = Menu::find($id);
+			$menu->name = $new_name;
+			$menu->title = $new_name;
+			$menu->save();
+
+			// dd($menu);
+			return redirect('admin/menus')->with($this->params);
+		}
+
 		if(($request->get('new-menu-item')) & ($request->get('new-menu-item-url'))){
 
 			$menu_item = new MenuItem;
@@ -122,10 +135,9 @@ class AdminMenuController extends Controller
 
 	
 	public function destroy($id){
-
-	}
-
-	public function pageList(){
+		$menu = Menu::find($id);
+		$menu->delete();
+        return redirect('admin/menus')->with($this->params);
 
 	}
 

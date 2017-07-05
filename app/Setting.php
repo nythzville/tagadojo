@@ -16,10 +16,6 @@ class Setting extends Model
      */
     protected $table = 'settings';
 
-    function getValue($name){
-    	$setting = Setting::where('name', $name)->first();
-        return $setting->value;
-    }
     
 }
 ?>

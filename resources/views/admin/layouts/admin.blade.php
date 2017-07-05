@@ -15,9 +15,12 @@
     {!! HTML::style('js/wysibb/theme/default/wbbtheme.css') !!}
 
     {!! HTML::style('themes/css/bootstrap-responsive.min.css') !!}
+    
+    {!! HTML::style('css/jquery-ui.css') !!}
 
     {!! HTML::style('css/theme.css') !!}
     {!! HTML::script('js/jquery.min.js') !!}
+    {!! HTML::script('js/jquery-ui.js') !!}
     
     
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}

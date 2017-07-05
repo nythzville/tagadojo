@@ -962,7 +962,7 @@ transition: all .2s ease-in-out;
 .widget-menu>li>a.collapsed .icon-chevron-down {
 	display: block
 }
-.widget-menu>li>a:hover {
+.widget-menu>li>a:hover,.widget-menu>li>a:active {
 	background-color: #28262c;
 	color: #fafafa;
 }
@@ -1714,30 +1714,47 @@ filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#fff5f5f5', end
 }
 
 /* Menus */
-ul#menus,ul#menu-items{
+table#menus,ul#menu-items{
 	list-style-type: none;
 	margin-left: 0;
 }
-ul#menus li,ul#menu-items li{
+table#menus tr,ul#menu-items li{
 	border-bottom: 1px solid #555;
 	padding: 10px;
 	cursor: pointer;
 	transition: all .5s;
 }
-ul#menus li.new-menu-text, ul#menu-items li.new-menu-item{
+
+table#menus tr#new-menu-text, ul#menu-items li.new-menu-item{
 	padding-left: 0;
 	display: none;
-	transition: all .5s;
+	/*transition: all .5s;*/
 }
-ul#menus li.new-item form, ul#menus li.new-item form input,ul#menu-items li.new-item form, ul#menu-items li.new-item form input{
+table#menus tr#new-menu-text,table#menus tr#new-menu-text td{
+	padding: 0;
+	background: #48525A;
+}
+table#menus tr#new-menu-text td input, table#menus tr td.menu-name input{
+	width: 100%;
+	padding: 5px 0;
+	margin-top: 10px; 
+	text-indent: 10px;
+}
+table#menus tr td.menu-name form.frm-edit-menu{
+	display: none;
+}
+table#menus tr#new-menu-text td input:focus{
+	box-shadow: none;
+}
+table#menus tr.new-item form, table#menus tr.new-item form input,ul#menu-items li.new-item form, ul#menu-items li.new-item form input{
 	width: 100%
 }
-ul#menus li.item:hover,ul#menus li.active,ul#menu-items li.item:hover,ul#menu-items li.active{
+table#menus tr.item:hover,table#menus tr.active,ul#menu-items li.item:hover,ul#menu-items li.active{
 	background:  #28262c;
 	color: #fff;
 }
 
-ul#menus li a.btn,ul#menu-items li a.btn{
+table#menus tr a.btn,table#menus tr button.btn,ul#menu-items li a.btn{
 	float: right;
     background: transparent;
     color: #fff;

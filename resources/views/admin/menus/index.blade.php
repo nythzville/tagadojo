@@ -9,51 +9,91 @@
                 <h5>Menus</h5>
             </div>
             <div class="module-body">
-                <ul id="menus">
+                <table id="menus" class="table">
                     @if(isset($menus))
                     @foreach($menus as $menu)
-                    <li id="{{$menu->id}}" class="menu-{{ $menu->id }} {{ ($menu->id == $current_menu->id )? 'active' : '' }}">
-                    {{ $menu->title }}
-                    <a href="#" class="btn" title="delete"><i class="fa fa-minus"></i></a>
-                    <a href="#edit-{{$menu->id}}" class="btn" title="edit"><i class="fa fa-edit"></i></a>
-                    </li>
+                    <tr id="{{$menu->id}}" class="menu-{{ $menu->id }} {{ ($menu->id == $current_menu->id )? 'active' : '' }}">
+                        <td class="menu-name">
+                            <p>{{ $menu->title }}</p>
+                            {!! Form::open(array('url' => 'admin/menus/'.$menu->id , 'id' => 'frm-edit-menu-'.$menu->id, 'class' => 'frm-edit-menu', 'method' => 'PUT')) !!}
+                            <input type="hidden" name="_action" value="edit_menu">
+                            <input type="text" name="menu-edit-name" value="{{ $menu->title }}" class="form-control" required>
+                            {!! Form::close() !!}
+                        </td>
+                        <td width="25%">
+                            <div class="menu-action-buttons">
+                                <!-- <a id="delete-{{ $menu->id }}" class="delete-menu btn" title="Delete"><i class="fa fa-minus"></i></a> -->
+                                {!! Form::open(array('url' => 'admin/menus/'.$menu->id , 'id' => 'frm-delete-menu-'.$menu->id, 'class' => 'frm-delete-menu', 'method' => 'DELETE')) !!}
+                                    <button type="submit" class="btn"><i class="fa fa-minus"></i></button>
+                                {!! Form::close() !!}
+                                <a id="edit-{{$menu->id}}" class="edit-menu btn" title="Edit"><i class="fa fa-edit"></i></a>
+                                
+                            </div>
+                            <div class="menu-edit-buttons" style="display: none;">
+                                <a class="cancel btn" title="Cancel"><i class="fa fa-close"></i></a>
+                            </div>
+                        </td>
+                    </tr>
                     @endforeach
                     @endif
-                    <li class="new-menu-text">
+                    <tr>
+                        
+                    </tr>
+                    <tr id="new-menu-text"><td colspan="2">
                     {!! Form::open(array('action' => 'Admin\AdminMenuController@store', 'id' => 'frm-menu')) !!}
                     <input id="new-menu" type="text" class="form-control" name="new-menu" required="">
-                    {!! Form::close() !!}
-
-                    </li>
-                </ul>
+                    {!! Form::close() !!}   
+                    </td>
+                    </tr>
+                </table>
+                <!-- </ul> -->
                 <button id="btn-add-menu" type="button" class="btn form-control" style="width: 100%"><i class="fa fa-plus"></i></button>
                 <script type="text/javascript">
                     $('#btn-add-menu').click(function(){
-                        $('.new-menu-text').show(500);
-                    });
-                    $('#frm-menu').submit(function(e){
-                        // var data = $(this).serialize();
-                        // $.post($(this).attr('action'), data)
-                        // .success(function(response){
-                        //     console.log(response);
-                        // })
-                        // .fail(function(response){
+                        $('#new-menu-text').show(500);
+                        $('#new-menu-text input[type=text]').focus();
 
-                        // });
-                        // e.preventDefault();
                     });
                     
-                    $('ul#menus li').click(function(){
+                    // updating Menu
+                    $('.edit-menu').click(function(){
+                        var id  = $(this).closest('tr').attr('id');
+                        
+                        $('#'+ id).addClass('editing-menu');
+                        $('#'+ id + ' td.menu-name p').hide();
+                        $('#'+ id + ' td.menu-name form').show(500);
+                        $('#'+ id + ' td.menu-name form input[type=text]').focus();
 
-                        var id = $(this).attr('id');
-                        var location = "{{ url('admin/menus') }}/" + id;
-                        window.location.href = location;
+                        $('#'+ id + ' .menu-action-buttons').hide();
+                        $('#'+ id + ' .menu-edit-buttons').show();
 
-                        // $('ul#menus li').removeClass('active');
-                        // $(this).addClass('active');
+
+                    });
+
+                    // Cancel edit
+                    $('a.cancel').click(function(){
+                        var id = $(this).closest('tr').attr('id');
+
+                        $('#'+ id).removeClass('editing-menu');
+                        $('#'+ id + ' td.menu-name p').show(500);
+                        $('#'+ id + ' td.menu-name form').hide();
+
+                        $('#'+ id + ' .menu-action-buttons').show();
+                        $('#'+ id + ' .menu-edit-buttons').hide();
+                    });
+
+
+                    $('table#menus tr td.menu-name').click(function(){
+
+                        if(!$(this).closest('tr').hasClass('editing-menu')){
+                            var id = $(this).closest('tr').attr('id');
+                            var location = "{{ url('admin/menus') }}/" + id;
+                            window.location.href = location;
+                        }
+                        
                     });
                     $(document).ready(function(){
-                        if($('ul#menus li.active').length == 1){
+                        if($('table#menus tr.active').length == 1){
                             $('#menu-item-list').show(500);
                         }
                     });
@@ -94,6 +134,7 @@
                         $(this).closest('form').submit();
                       }
                     });
+                    $( "#menu-items" ).sortable();
                 </script>
             </div>
             
