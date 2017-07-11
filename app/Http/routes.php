@@ -7,7 +7,7 @@ Route::auth();
 |	Admin Routes
 |--------------------
 */
-Route::group(['prefix' => 'admin', 'namespace'=> 'Admin'], function () {
+Route::group(['prefix' => 'admin', 'namespace'=> 'Admin', 'middleware' => 'admin'], function () {
 
 	Route::Resource('pages', 'AdminPageController');
 
@@ -17,7 +17,7 @@ Route::group(['prefix' => 'admin', 'namespace'=> 'Admin'], function () {
 
 	Route::Resource('widgets', 'AdminWidgetController');
 
-	Route::get('settings', 'AdminSettingController@index');
+	Route::Resource('settings', 'AdminSettingController');
 
 	Route::post('menus/add', 'AdminMenuController@addMenu');
 	

@@ -27,7 +27,7 @@
                                     <button type="submit" class="btn"><i class="fa fa-minus"></i></button>
                                 {!! Form::close() !!}
                                 <a id="edit-{{$menu->id}}" class="edit-menu btn" title="Edit"><i class="fa fa-edit"></i></a>
-                                
+
                             </div>
                             <div class="menu-edit-buttons" style="display: none;">
                                 <a class="cancel btn" title="Cancel"><i class="fa fa-close"></i></a>
@@ -108,7 +108,7 @@
                 <ul id="menu-items">
                     @if(isset($current_menu_items))
                     @foreach($current_menu_items as $item)
-                    <li class="menu-item-{{ $item->id }}">{{$item->title}} <br/> <small>{{ $item->url }}</small>
+                    <li id="item-{{ $item->id }}" class="menu-item">{{$item->title}} <br/> <small>{{ $item->url }}</small>
                     <a href="#" class="btn" title="delete"><i class="fa fa-minus"></i></a>
                     <a href="#edit-{{$item->id}}" class="btn" title="edit"><i class="fa fa-edit"></i></a>
                     </li>
@@ -134,7 +134,52 @@
                         $(this).closest('form').submit();
                       }
                     });
-                    $( "#menu-items" ).sortable();
+
+                    var menu_items = $( "#menu-items" ).sortable({
+
+                        tolerance: 0,
+                        // set $item relative to cursor position
+                        onDragStart: function ($item, container, _super) {
+                            var offset = $item.offset(),
+                                pointer = container.rootGroup.pointer;
+
+                            adjustment = {
+                              left: pointer.left - offset.left,
+                              top: pointer.top - offset.top
+                            };
+
+                            _super($item, container);
+                        },
+                        onDrag: function ($item, position) {
+                            $item.css({
+                              left: position.left - adjustment.left,
+                              top: position.top - adjustment.top
+                            });
+
+                        },
+                        onDrop: function ($item, container, _super, event) {
+                            $item.removeClass(container.group.options.draggedClass).removeAttr("style")
+                            $("body").removeClass(container.group.options.bodyClass)
+                            
+                            data = menu_items.sortable();
+                            var items = data.find('li.menu-item');
+
+                            var items_order = [];
+                            items.each(function(index, item){
+                                var id = item.id.replace('item-','');
+                                items_order.push(parseInt(id));
+                            });
+
+                            $.post("{{url('admin/menus/'.$current_menu->id. '/')}}", {"_token": "{{ csrf_token() }}","_method":"PUT","_action": "menu_order", "menu_order" : items_order } )
+                            .success(function(response){
+                                console.log(response);
+                            })
+                            .fail(function(response){
+                                console.log(response);
+                            });
+                        },
+                    });
+
                 </script>
             </div>
             

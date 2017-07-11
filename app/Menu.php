@@ -17,7 +17,7 @@ class Menu extends Model
     protected $table = 'menus';
 
     function getItems(){
-        return $this->hasMany('App\MenuItem', 'menu', 'id')->orderBy('order', 'asc');
+        return $this->hasMany('App\MenuItem', 'menu', 'id')->orderBy('order', 'ASC');
     }
 
 }

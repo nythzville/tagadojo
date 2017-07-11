@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Laravel</title>
+    <title>Mavel Admin</title>
 
     <!-- Fonts -->
     {!! HTML::style('font-awesome/css/font-awesome.min.css') !!}
@@ -21,6 +21,8 @@
     {!! HTML::style('css/theme.css') !!}
     {!! HTML::script('js/jquery.min.js') !!}
     {!! HTML::script('js/jquery-ui.js') !!}
+    {!! HTML::script('js/jquery-sortable.js') !!}
+    
     
     
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
@@ -84,7 +86,7 @@
                                 <li><a href="#">Edit Profile</a></li>
                                 <li><a href="#">Account Settings</a></li>
                                 <li class="divider"></li>
-                                <li><a href="#">Logout</a></li>
+                                <li><a href="{{ url('logout') }}">Logout</a></li>
                             </ul>
                         </li>
                     </ul>

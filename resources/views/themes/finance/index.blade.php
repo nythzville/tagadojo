@@ -14,18 +14,12 @@
 
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-    <meta name="description" content="">
+    <meta name="description" content="{{ ( isset($settings['meta_description']))? $settings['meta_description'] : 'Another Website From Maven' }}">
 
     <meta name="author" content="">
 
-    <!-- <link rel="icon" href="../../favicon.ico"> -->
-
-
-
-    <title>Calinog Rural Bank</title>
-
-
-
+    <!-- <link rel="icon" href="../../favicon.ico">   
+    <title>{{ ( isset($settings['site_name']))? $settings['site_name'] : 'Mavel' }} | {{ (isset($page))? $page->name : '' }}</title>
     <!-- Bootstrap core CSS -->
     {!! HTML::style('themes/finance/css/bootstrap.min.css') !!}
 
@@ -76,15 +70,12 @@
 
               <ul class="nav navbar-nav">
 
-                <li class="active"><a href="#">Home</a></li>
+                @foreach($primary_menu->getItems as $item)
 
-                <li><a href="#about">About</a></li>
+                <li {{ ($page->url == $item->url )? 'class="active" ': '' }}><a href="{{ $item->url }}">{{ $item->name }}</a></li>
 
-                <li><a href="#about">Services</a></li>
-
-                <li><a href="#about">News</a></li>
-
-                <li><a href="#contact">Contact</a></li>
+                @endforeach
+                
 
               </ul>
 
