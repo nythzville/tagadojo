@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFilesTable extends Migration
+class CreateWidgetsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,15 +12,12 @@ class CreateFilesTable extends Migration
      */
     public function up()
     {
-        Schema::create('files', function (Blueprint $table) {
+        Schema::create('widgets', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->integer('size');
-            $table->string('url');
-            $table->string('thumbnailUrl');
-            $table->string('deleteUrl');
-            $table->string('deleteType');
-            $table->string('mimeType');
+            $table->string('code');
+            $table->text('content');
+            $table->integer('author');
             $table->string('status');
             $table->timestamps();
         });
@@ -33,6 +30,6 @@ class CreateFilesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('files');
+        Schema::drop('widgets');
     }
 }

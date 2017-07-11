@@ -8,7 +8,7 @@
         </li>
         
         <li>
-            <a href="#">
+            <a href="{{ url('admin/posts') }}">
                 <i class="menu-icon fa fa-edit"></i>
                 Post
                 <b class="label green pull-right">11</b>
@@ -16,9 +16,9 @@
         </li>
         
         <li>
-            <a href="task.html">
+            <a href="{{ url('admin/files') }}">
                 <i class="menu-icon fa fa-edit"></i>
-                Tasks
+                Files
                 <b class="label orange pull-right">19</b>
             </a>
         </li>
@@ -89,7 +89,7 @@
             </a>
             
         <li>
-            <a href="#">
+            <a href="{{ url('logout') }}">
                 <i class="menu-icon icon-signout"></i>
                 Logout
             </a>

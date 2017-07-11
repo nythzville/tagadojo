@@ -22,9 +22,14 @@
     {!! HTML::script('js/jquery.min.js') !!}
     {!! HTML::script('js/jquery-ui.js') !!}
     {!! HTML::script('js/jquery-sortable.js') !!}
-    
-    
-    
+        
+        <!-- ================== BEGIN PAGE LEVEL CSS STYLE ================== -->
+    <link href="{{ URL::asset('plugins/jquery-file-upload/blueimp-gallery/blueimp-gallery.min.css') }}" rel="stylesheet" />
+    <link href="{{ URL::asset('plugins/jquery-file-upload/css/jquery.fileupload.css') }}" rel="stylesheet" />
+    <link href="{{ URL::asset('plugins/jquery-file-upload/css/jquery.fileupload-ui.css') }}" rel="stylesheet" />
+    <!-- ================== END PAGE LEVEL CSS STYLE ================== -->
+
+   
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
 
 </head>
@@ -116,6 +121,27 @@
     <script type="text/javascript">
         $('#editor').wysibb();
     </script>
+
+    <!-- ================== BEGIN PAGE LEVEL JS ================== -->
+    <script src="{{ URL::asset('plugins/jquery-file-upload/js/vendor/jquery.ui.widget.js') }}"></script>
+    <script src="{{ URL::asset('plugins/jquery-file-upload/js/vendor/tmpl.min.js') }}"></script>
+    <script src="{{ URL::asset('plugins/jquery-file-upload/js/vendor/load-image.min.js') }}"></script>
+    <script src="{{ URL::asset('plugins/jquery-file-upload/js/vendor/canvas-to-blob.min.js') }}"></script>
+    <script src="{{ URL::asset('plugins/jquery-file-upload/blueimp-gallery/jquery.blueimp-gallery.min.js') }}"></script>
+    <script src="{{ URL::asset('plugins/jquery-file-upload/js/jquery.iframe-transport.js') }}"></script>
+    <script src="{{ URL::asset('plugins/jquery-file-upload/js/jquery.fileupload.js') }}"></script>
+    <script src="{{ URL::asset('plugins/jquery-file-upload/js/jquery.fileupload-process.js') }}"></script>
+    <script src="{{ URL::asset('plugins/jquery-file-upload/js/jquery.fileupload-image.js') }}"></script>
+    <script src="{{ URL::asset('plugins/jquery-file-upload/js/jquery.fileupload-audio.js') }}"></script>
+    <script src="{{ URL::asset('plugins/jquery-file-upload/js/jquery.fileupload-video.js') }}"></script>
+    <script src="{{ URL::asset('plugins/jquery-file-upload/js/jquery.fileupload-validate.js') }}"></script>
+    <script src="{{ URL::asset('plugins/jquery-file-upload/js/jquery.fileupload-ui.js') }}"></script>
+    <script src="{{ URL::asset('js/form-multiple-upload.demo.min.js') }}"></script>
+    <!-- ================== END PAGE LEVEL JS ================== -->
+
+    <script src="{{ URL::asset('plugins/DataTables/js/jquery.dataTables.js') }}"></script>
+
+
     {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
 </body>
 </html>

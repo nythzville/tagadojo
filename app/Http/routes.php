@@ -9,7 +9,11 @@ Route::auth();
 */
 Route::group(['prefix' => 'admin', 'namespace'=> 'Admin', 'middleware' => 'admin'], function () {
 
+	Route::Resource('posts', 'AdminPostController');
+	
 	Route::Resource('pages', 'AdminPageController');
+
+	Route::Resource('files', 'AdminFileController');
 
 	Route::Resource('users', 'AdminUserController');
 	
