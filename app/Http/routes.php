@@ -32,6 +32,8 @@ Route::group(['prefix' => 'admin', 'namespace'=> 'Admin', 'middleware' => 'admin
 });
 
 
+Route::get('msg/account', 'MessageController@index');
+
 Route::get('/', 'HomeController@index');
 
 

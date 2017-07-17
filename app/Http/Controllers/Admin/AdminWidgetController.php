@@ -7,6 +7,8 @@ use App\Http\Requests;
 use Illuminate\Http\Request;
 
 use App\Setting;
+use App\Widget;
+
 
 class AdminWidgetController extends Controller
 {
@@ -29,8 +31,20 @@ class AdminWidgetController extends Controller
      */
     public function index()
     {
+        $widgets = Widget::all();
+        $this->params['widgets'] = $widgets;
+        return view('admin.widgets.index')->with($this->params);
+        
+    }
 
-        return"hello";
+    public function create(){
+
+        return view('admin.widgets.create')->with($this->params);
+
+    }
+
+    public function store(Request $request){
+
         
     }
 }

@@ -53,10 +53,25 @@
             </a>
         </li>
         <li >
-            <a href="{{ url('admin/widgets') }}">
+            <a class="collapsed" data-toggle="collapse" href="#toggleWidgets">
                 <i class="menu-icon fa fa-file"></i>
+                <i class="fa fa-chevron-down pull-right"></i><i class="fa fa-chevron-up pull-right"></i>
+
                 Widgets
             </a>
+            <ul id="toggleWidgets" class="collapse unstyled" style="transition: all 1s;">
+                <li>
+                    <a href="{{ url('/admin/widgets/create')}}">
+                        Add Page
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url('/admin/widgets')}}">
+                        All Pages
+                    </a>
+                </li>
+               
+            </ul>
         </li>    
     </ul>
 
